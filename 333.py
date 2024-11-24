@@ -1,5 +1,6 @@
 import streamlit as st
 import json
+import os
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 from neo4j import GraphDatabase
@@ -8,10 +9,10 @@ rcParams['font.sans-serif'] = ['Microsoft YaHei']  # 设置为微软雅黑或其
 rcParams['axes.unicode_minus'] = False  # 防止负号显示为方块
 
 # 配置 Neo4j 连接
-URI = "bolt://localhost:7687"  # 替换为你的 Neo4j 实例地址
-USERNAME = "neo4j"  # 替换为你的用户名
-PASSWORD = "yzg11888"  # 替换为你的密码
-driver = GraphDatabase.driver(URI, auth=(USERNAME, PASSWORD))
+uri = st.secrets["neo4j"]["uri"]
+username = st.secrets["neo4j"]["username"]
+password = st.secrets["neo4j"]["password"]
+driver = GraphDatabase.driver(uri, auth=(username, password))
 
 
 # 从 Neo4j 获取知识图谱数据
