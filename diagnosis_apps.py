@@ -240,8 +240,7 @@ def main():
     st.set_page_config(page_title="疾病诊断系统", layout="wide")
 
     # 加载知识图谱
-    file_path = r"sleep_konwledge_graph.json"
-    # file_path = r"sleep_konwledge_graph.json"
+    file_path = r"JSON_new.json"
     knowledge_graph = load_knowledge_graph(file_path)
 
     # 页面导航
