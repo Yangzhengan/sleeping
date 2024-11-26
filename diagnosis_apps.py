@@ -187,13 +187,13 @@ def test_module(knowledge_graph):
     st.markdown(f"- **疾病数量：** {disorder_counts}")
     st.markdown(f"- **独立症状数量：** {symptom_counts}")
 
-    # 数据可视化：疾病与症状数量
-    st.write("#### 疾病和症状统计条形图")
-    fig, ax = plt.subplots()
-    ax.bar(["疾病数量", "症状数量"], [disorder_counts, symptom_counts], color=["lightblue", "salmon"])
-    ax.set_ylabel("数量")
-    ax.set_title("知识图谱统计数据")
-    st.pyplot(fig)
+    # # 数据可视化：疾病与症状数量
+    # st.write("#### 疾病和症状统计条形图")
+    # fig, ax = plt.subplots()
+    # ax.bar(["疾病数量", "症状数量"], [disorder_counts, symptom_counts], color=["lightblue", "salmon"])
+    # ax.set_ylabel("数量")
+    # ax.set_title("知识图谱统计数据")
+    # st.pyplot(fig)
 
     # 提供诊断的覆盖率
     st.subheader("诊断覆盖率测试")
