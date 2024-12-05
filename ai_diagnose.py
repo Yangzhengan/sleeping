@@ -5,7 +5,6 @@ from neo4j import GraphDatabase
 import time
 import io
 
-
 rcParams['font.sans-serif'] = ['SimHei']  # 正常显示为中文标签
 rcParams['axes.unicode_minus'] = False  # 防止负号显示为方块
 
@@ -81,6 +80,7 @@ def create_vis_html(nodes, edges):
     </html>
     """
 
+
 # 整合到诊断结果模块
 def diagnosis_results_module(knowledge_graph):
     st.header("诊断结果")
@@ -121,6 +121,7 @@ def authenticate_user(username, password):
     user_credentials = {"shuimianjibing": "123456"}
     return user_credentials.get(username) == password
 
+
 # 添加主安全模块
 def security_module():
     st.title("安全模块")
@@ -150,9 +151,9 @@ def security_module():
             st.success("所有会话数据已清除！")
             st.experimental_set_query_params()
 
-
         # 提示用户继续操作
         st.info("您已通过身份验证，可返回导航栏使用其他功能。")
+
 
 # 添加测试模块
 def test_module(knowledge_graph):
@@ -190,7 +191,6 @@ def test_module(knowledge_graph):
     symptom_counts = len(all_symptoms)
     st.markdown(f"- **疾病数量：** {disorder_counts}")
     st.markdown(f"- **独立症状数量：** {symptom_counts}")
-
 
     # 提供诊断的覆盖率
     st.subheader("诊断覆盖率测试")
@@ -232,7 +232,8 @@ def get_diagnosis(symptoms, knowledge_graph):
 
     return possible_diagnoses
 
-def modify_probability(data,step,target_ids):
+
+def modify_probability(data, step, target_ids):
     """
       根据多个target_ids修改数据中的probability字段
       :param data: JSON数据
@@ -282,6 +283,7 @@ def modify_probability(data,step,target_ids):
                 item['probability'] = updated_probabilities
     return data
 
+
 # 主函数
 def main():
     if "feedback_work" not in st.session_state:
@@ -289,11 +291,9 @@ def main():
     st.set_page_config(page_title="疾病诊断系统", layout="wide")
 
     # 加载知识图谱
-    file_path = r"C:\Users\Administrator\Desktop\cancer\code\sleep_konwledge_graph.json"
+    file_path = "sleep_konwledge_graph.json"
     # file_path = r"sleep_konwledge_graph.json"
     knowledge_graph = load_knowledge_graph(file_path)
-
-
 
     st.sidebar.markdown('<div style="font-size: 30px; font-weight: bold;">导航菜单</div>', unsafe_allow_html=True)
     # 使用 HTML 设置更大的字体
@@ -318,7 +318,6 @@ def main():
         - 支持数据可视化及用户反馈。
         """)
         st.info("隐私声明：本系统仅在会话中保存您的数据，所有输入均不会上传到服务器或外部存储。")
-
 
         st.subheader("请按照以下步骤在左侧边框中逐步操作：")
         # 第一步：选择症状
@@ -365,7 +364,7 @@ def main():
 
     elif choice == "反馈":
 
-        if st.session_state["feedback_work"]!=0:
+        if st.session_state["feedback_work"] != 0:
             st.header("用户反馈")
             feedback = st.text_area("请留下您的宝贵意见：", "")
             step = st.radio("您对本次诊断满意吗？", [" ", "不确定", "满意", "不满意"])
@@ -373,7 +372,6 @@ def main():
             if "symptoms" in st.session_state and st.session_state["symptoms"]:
                 selected_symptoms = st.session_state["symptoms"]
                 possible_diagnoses = get_diagnosis(selected_symptoms, knowledge_graph)
-
 
             target_ids = [diag["id"] for diag in possible_diagnoses]
             updated_data = modify_probability(knowledge_graph, step, target_ids)
@@ -407,9 +405,6 @@ def main():
         if st.button("清除会话数据"):
             st.session_state.clear()
             st.success("所有会话数据已清除！")
-
-
-
 
 
 if __name__ == "__main__":
